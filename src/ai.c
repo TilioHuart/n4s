@@ -6,12 +6,29 @@
 */
 
 #include "my_macros.h"
+#include "ai.h"
+#include "retrieve_information.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+static int init_status(status_t *status)
+{
+    if (status == NULL)
+        return FAILURE;
+    status->finish_line = FALSE;
+    return  SUCCESS;
+}
 
 int launch_ai(void)
 {
+    status_t *status = malloc(sizeof(status_t));
+
     printf("START_SIMULATION\n");
-    while (1)
-        printf("CAR_FORWARD:1\n");
+    if (init_status(status) == FAILURE)
+        return EPITECH_FAILURE;
+    while (status->finish_line != TRUE) {
+        retrieve_information();
+    }
+    free(status);
     return SUCCESS;
 }

@@ -1,0 +1,14 @@
+.cache
+compile_commands.json
+.idea
+ai
+*.o
+coding-style-reports.log
+*.gcno
+*.a
+*.out
+*.gcda
+vgcore*
+unit_tests
+bonus
+.vscode

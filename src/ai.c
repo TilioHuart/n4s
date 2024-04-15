@@ -16,7 +16,10 @@ static int init_status(status_t *status)
     if (status == NULL)
         return FAILURE;
     status->finish_line = FALSE;
-    return  SUCCESS;
+    status->front_distance = -1;
+    status->left_distance = -1;
+    status->right_distance = -1;
+    return SUCCESS;
 }
 
 int launch_ai(void)
@@ -27,7 +30,9 @@ int launch_ai(void)
     if (init_status(status) == FAILURE)
         return EPITECH_FAILURE;
     while (status->finish_line != TRUE) {
-        retrieve_information();
+        if (retrieve_information(status) == 1)
+            continue;
+        printf("CAR_FORWARD:0.2\n");
     }
     free(status);
     return SUCCESS;

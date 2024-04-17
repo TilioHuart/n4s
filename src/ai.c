@@ -8,6 +8,7 @@
 #include "my_macros.h"
 #include "ai.h"
 #include "retrieve_information.h"
+#include "main_branch.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,10 +16,17 @@ static int init_status(status_t *status)
 {
     if (status == NULL)
         return FAILURE;
+    status->distance = malloc(sizeof(distance_t));
+    if (status->distance == NULL)
+        return FAILURE;
+    status->distance->front = 0;
+    status->distance->middle_left = 0;
+    status->distance->left = 0;
+    status->distance->middle_right = 0;
+    status->distance->right = 0;
     status->finish_line = FALSE;
-    status->front_distance = -1;
-    status->left_distance = -1;
-    status->right_distance = -1;
+    status->forward = FALSE;
+    status->speed = 0.5;
     return SUCCESS;
 }
 
@@ -30,9 +38,9 @@ int launch_ai(void)
     if (init_status(status) == FAILURE)
         return EPITECH_FAILURE;
     while (status->finish_line != TRUE) {
-        if (retrieve_information(status) == 1)
-            continue;
-        printf("CAR_FORWARD:0.2\n");
+        retrieve_information(status);
+        if (main_branch(status) == FAILURE)
+            return FAILURE;
     }
     free(status);
     return SUCCESS;

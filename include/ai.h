@@ -10,13 +10,19 @@
 
     #include <unistd.h>
 
+typedef struct distance {
+    int right;
+    int left;
+    int middle_right;
+    int middle_left;
+    int front;
+} distance_t;
+
 typedef struct status {
     size_t finish_line;
-    int front_distance;
-    int left_middle_distance;
-    int right_middle_distance;
-    int right_distance;
-    int left_distance;
+    int forward;
+    float speed;
+    distance_t *distance;
 } status_t;
 
 int launch_ai(void);

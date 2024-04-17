@@ -26,13 +26,12 @@ static int retrieve_right_distance(char **arr, status_t *status)
 {
     int nb_value = 0;
 
-    status->right_distance = 0;
+    status->distance->right = 0;
     for (size_t i = 27; i < 33; i += 1) {
-        status->right_distance += atoi(arr[i]);
+        status->distance->right += atoi(arr[i]);
         nb_value += 1;
     }
-    status->right_distance /= nb_value;
-    fprintf(stderr, "right = %d\n", status->right_distance);
+    status->distance->right /= nb_value;
     return SUCCESS;
 }
 
@@ -40,13 +39,11 @@ static int retrieve_right_middle_distance(char **arr, status_t *status)
 {
     int nb_value = 0;
 
-    status->right_distance = 0;
-    for (size_t i = 22; i < 27; i += 1) {
-        status->right_middle_distance += atoi(arr[i]);
+    for (size_t i = 32; i < 37; i += 1) {
+        status->distance->middle_right += atoi(arr[i]);
         nb_value += 1;
     }
-    status->right_middle_distance /= nb_value;
-    fprintf(stderr, "right middle = %d\n", status->right_middle_distance);
+    status->distance->middle_right /= nb_value;
     return SUCCESS;
 }
 
@@ -54,13 +51,12 @@ static int retrieve_left_distance(char **arr, status_t *status)
 {
     int nb_value = 0;
 
-    status->left_distance = 0;
-    for (size_t i = 1; i < 7; i += 1) {
-        status->left_distance += atoi(arr[i]);
+    status->distance->left = 0;
+    for (size_t i = 6; i < 13; i += 1) {
+        status->distance->left += atoi(arr[i]);
         nb_value += 1;
     }
-    status->left_distance /= nb_value;
-    fprintf(stderr, "left = %d\n", status->left_distance);
+    status->distance->left /= nb_value;
     return SUCCESS;
 }
 
@@ -68,13 +64,11 @@ static int retrieve_left_middle_distance(char **arr, status_t *status)
 {
     int nb_value = 0;
 
-    status->left_distance = 0;
-    for (size_t i = 7; i < 13; i += 1) {
-        status->left_middle_distance += atoi(arr[i]);
+    for (size_t i = 13; i < 19; i += 1) {
+        status->distance->middle_left += atoi(arr[i]);
         nb_value += 1;
     }
-    status->left_middle_distance /= nb_value;
-    fprintf(stderr, "left middle = %d\n", status->left_middle_distance);
+    status->distance->middle_left /= nb_value;
     return SUCCESS;
 }
 
@@ -82,13 +76,11 @@ static int retrieve_front_distance(char **arr, status_t *status)
 {
     int nb_value = 0;
 
-    status->front_distance = 0;
-    for (size_t i = 12; i < 22; i += 1) {
-        status->front_distance += atoi(arr[i]);
+    for (size_t i = 19; i < 25; i += 1) {
+        status->distance->front += atoi(arr[i]);
         nb_value += 1;
     }
-    status->front_distance /= nb_value;
-    fprintf(stderr, "front = %d\n", status->front_distance);
+    status->distance->front /= nb_value;
     return SUCCESS;
 }
 
@@ -100,8 +92,9 @@ int retrieve_information(status_t *status)
     printf("GET_INFO_LIDAR\n");
     fflush(stdout);
     fgets(buf, sizeof(buf), stdin);
-    arr = my_str_to_word_array(buf,
-        "abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ :");
+    arr = my_str_to_word_array(buf, " :");
+    for (size_t i = 0; arr[i] != NULL; i += 1)
+        fprintf(stderr, "arr[%ld] = %s\n", i, arr[i]);
     if (check_size_information(arr) < 34)
         return 1;
     retrieve_front_distance(arr, status);
@@ -109,6 +102,5 @@ int retrieve_information(status_t *status)
     retrieve_left_distance(arr, status);
     retrieve_right_middle_distance(arr, status);
     retrieve_right_distance(arr, status);
-    fprintf(stderr, "------------------------------------\n");
     return SUCCESS;
 }

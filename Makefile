@@ -8,6 +8,7 @@
 SRC	=	src/main.c
 SRC	+=	src/ai.c
 SRC	+=	src/parser/retrieve_information.c
+SRC	+=	src/ia/main_branch.c
 
 OBJ = $(SRC:.c=.o)
 

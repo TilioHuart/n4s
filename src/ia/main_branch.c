@@ -12,7 +12,7 @@
 int main_branch(status_t *status)
 {
     if (status->distance->front >= 200 && status->forward == FALSE) {
-        fprintf(stderr, "front = %d\n", status->distance->front);
+        fprintf(stderr, "front = %d\n", status->distance->middle_left);
         printf("CAR_FORWARD:%f\n", status->speed);
         status->forward = TRUE;
     }

@@ -13,8 +13,10 @@
 typedef struct status {
     size_t finish_line;
     int front_distance;
-    int left_distance;
+    int left_middle_distance;
+    int right_middle_distance;
     int right_distance;
+    int left_distance;
 } status_t;
 
 int launch_ai(void);

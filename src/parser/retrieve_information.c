@@ -27,7 +27,7 @@ static int retrieve_right_distance(char **arr, status_t *status)
     int nb_value = 0;
 
     status->right_distance = 0;
-    for (size_t i = 22; i < 33; i += 1) {
+    for (size_t i = 27; i < 33; i += 1) {
         status->right_distance += atoi(arr[i]);
         nb_value += 1;
     }
@@ -36,17 +36,45 @@ static int retrieve_right_distance(char **arr, status_t *status)
     return SUCCESS;
 }
 
+static int retrieve_right_middle_distance(char **arr, status_t *status)
+{
+    int nb_value = 0;
+
+    status->right_distance = 0;
+    for (size_t i = 22; i < 27; i += 1) {
+        status->right_middle_distance += atoi(arr[i]);
+        nb_value += 1;
+    }
+    status->right_middle_distance /= nb_value;
+    fprintf(stderr, "right middle = %d\n", status->right_middle_distance);
+    return SUCCESS;
+}
+
 static int retrieve_left_distance(char **arr, status_t *status)
 {
     int nb_value = 0;
 
     status->left_distance = 0;
-    for (size_t i = 1; i < 13; i += 1) {
+    for (size_t i = 1; i < 7; i += 1) {
         status->left_distance += atoi(arr[i]);
         nb_value += 1;
     }
     status->left_distance /= nb_value;
     fprintf(stderr, "left = %d\n", status->left_distance);
+    return SUCCESS;
+}
+
+static int retrieve_left_middle_distance(char **arr, status_t *status)
+{
+    int nb_value = 0;
+
+    status->left_distance = 0;
+    for (size_t i = 7; i < 13; i += 1) {
+        status->left_middle_distance += atoi(arr[i]);
+        nb_value += 1;
+    }
+    status->left_middle_distance /= nb_value;
+    fprintf(stderr, "left middle = %d\n", status->left_middle_distance);
     return SUCCESS;
 }
 
@@ -77,7 +105,9 @@ int retrieve_information(status_t *status)
     if (check_size_information(arr) < 34)
         return 1;
     retrieve_front_distance(arr, status);
+    retrieve_left_middle_distance(arr, status);
     retrieve_left_distance(arr, status);
+    retrieve_right_middle_distance(arr, status);
     retrieve_right_distance(arr, status);
     fprintf(stderr, "------------------------------------\n");
     return SUCCESS;

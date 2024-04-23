@@ -25,6 +25,8 @@ typedef struct status {
     int forward;
     int left;
     int right;
+    int left_two;
+    int right_two;
     float speed;
     distance_t *distance;
 } status_t;

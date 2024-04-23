@@ -29,6 +29,8 @@ static int init_status(status_t *status)
     status->forward = FALSE;
     status->left = FALSE;
     status->right = FALSE;
+    status->left_two = FALSE;
+    status->right_two = FALSE;
     status->speed = 0.3;
     return SUCCESS;
 }
@@ -42,8 +44,9 @@ int launch_ai(void)
         return EPITECH_FAILURE;
     while (status->finish_line != TRUE) {
         usleep(100000);
-        retrieve_information(status);
         fflush(stdout);
+        fflush(stdin);
+        retrieve_information(status);
         if (main_branch(status) == FAILURE)
             return FAILURE;
     }

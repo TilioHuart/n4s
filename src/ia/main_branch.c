@@ -15,7 +15,7 @@ static void handle_speed(status_t *status)
     if ((status->distance->front >= 1500 && status->forward == FALSE) ||
         (status->distance->left >= 300 && status->forward == FALSE) ||
         (status->distance->right >= 300 && status->forward == FALSE)) {
-        printf("CAR_FORWARD:0.2\n");
+        printf("CAR_FORWARD:0.1\n");
         fprintf(stderr, "normal speed with %d front and %d left and %d right\n", status->distance->front, status->distance->left, status->distance->right);
         status->forward = TRUE;
         status->left = FALSE;
@@ -30,7 +30,7 @@ static void handle_speed(status_t *status)
 static void handle_left(status_t *status)
 {
     if (status->distance->right <= 600 && status->distance->right <=
-        status->distance->left && status->distance->front <= 1300 && status->left == FALSE) {
+        status->distance->left && status->distance->front <= 1000 && status->left == FALSE) {
         printf("WHEELS_DIR:0.2\n");
         printf("CYCLE_WAIT:1\n");
         fprintf(stderr, "turn left with %d front and %d left and %d right\n", status->distance->front, status->distance->left, status->distance->right);
@@ -41,15 +41,17 @@ static void handle_left(status_t *status)
 static void handle_right(status_t *status)
 {
     if (status->distance->left <= 600 && status->distance->left <=
-        status->distance->right && status->distance->front <= 1300 && status->right == FALSE) {
+        status->distance->right && status->distance->front <= 1000 && status->right == FALSE) {
         printf("WHEELS_DIR:-0.2\n");
+        printf("CYCLE_WAIT:1\n");
         fprintf(stderr, "turn right with %d front and %d left and %d right\n", status->distance->front, status->distance->left, status->distance->right);
         status->right = TRUE;
         return;
     }
     if (status->distance->left <= status->distance->right &&
-        status->distance->front <= 1300 && status->right == FALSE) {
+        status->distance->front <= 1000 && status->right == FALSE) {
         printf("WHEELS_DIR:-0.2\n");
+        printf("CYCLE_WAIT:1\n");
         fprintf(stderr, "turn right bijour with %d front and %d left and %d right\n", status->distance->front, status->distance->left, status->distance->right);
         status->right = TRUE;
     }

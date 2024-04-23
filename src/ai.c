@@ -11,6 +11,7 @@
 #include "main_branch.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 static int init_status(status_t *status)
 {
@@ -40,6 +41,7 @@ int launch_ai(void)
     if (init_status(status) == FAILURE)
         return EPITECH_FAILURE;
     while (status->finish_line != TRUE) {
+        usleep(100000);
         retrieve_information(status);
         fflush(stdout);
         if (main_branch(status) == FAILURE)

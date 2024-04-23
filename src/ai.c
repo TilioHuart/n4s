@@ -26,7 +26,9 @@ static int init_status(status_t *status)
     status->distance->right = 0;
     status->finish_line = FALSE;
     status->forward = FALSE;
-    status->speed = 0.5;
+    status->left = FALSE;
+    status->right = FALSE;
+    status->speed = 0.3;
     return SUCCESS;
 }
 

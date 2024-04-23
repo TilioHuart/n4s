@@ -93,8 +93,6 @@ int retrieve_information(status_t *status)
     fflush(stdout);
     fgets(buf, sizeof(buf), stdin);
     arr = my_str_to_word_array(buf, " :");
-    for (size_t i = 0; arr[i] != NULL; i += 1)
-        fprintf(stderr, "arr[%ld] = %s\n", i, arr[i]);
     if (check_size_information(arr) < 34)
         return 1;
     retrieve_front_distance(arr, status);
@@ -102,5 +100,7 @@ int retrieve_information(status_t *status)
     retrieve_left_distance(arr, status);
     retrieve_right_middle_distance(arr, status);
     retrieve_right_distance(arr, status);
+    status->distance->left_radius = atoi(arr[6]);
+    status->distance->right_radius = atoi(arr[37]);
     return SUCCESS;
 }

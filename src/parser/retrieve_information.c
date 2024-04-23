@@ -95,6 +95,9 @@ int retrieve_information(status_t *status)
     arr = my_str_to_word_array(buf, " :");
     if (check_size_information(arr) < 34)
         return 1;
+//    for (size_t i = 0; arr[i] != NULL; i += 1) {
+//        fprintf(stderr, "arr[%ld] = %s\n", i, arr[i]);
+//    }
     retrieve_front_distance(arr, status);
     retrieve_left_middle_distance(arr, status);
     retrieve_left_distance(arr, status);

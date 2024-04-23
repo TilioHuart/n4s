@@ -41,6 +41,7 @@ int launch_ai(void)
         return EPITECH_FAILURE;
     while (status->finish_line != TRUE) {
         retrieve_information(status);
+        fflush(stdout);
         if (main_branch(status) == FAILURE)
             return FAILURE;
     }
